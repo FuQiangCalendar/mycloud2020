@@ -1,0 +1,8 @@
+*.classpath
+*.project
+*.MF
+*.properties
+*.class
+*.factorypath
+*.xml
+*.yml

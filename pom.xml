@@ -14,6 +14,7 @@
     <module>cloud-provider-payment8002</module>
     <module>cloud-provider-payment8004</module>
     <module>cloud-consumerzk-order80</module>
+    <module>cloud-spider-selenium8090</module>
   </modules>
   
   <!--统一管理jar包版本-->
