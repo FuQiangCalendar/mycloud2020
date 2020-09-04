@@ -7,3 +7,5 @@
 *.xml
 *.yml
 *.prefs
+/.settings
+/*.project
