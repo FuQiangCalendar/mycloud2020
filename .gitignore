@@ -4,11 +4,7 @@
 *.properties
 *.class
 *.factorypath
-*.xml
-*.yml
 *.prefs
 /.settings
 /*.project
-*/target/*
-/cloud-eureka-server7002/target/classes
-/cloud-eureka-server7002/target/classes/com/atguigu/springcloud
+/target/
