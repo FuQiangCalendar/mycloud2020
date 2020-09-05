@@ -4,8 +4,7 @@
 *.properties
 *.class
 *.factorypath
-*.xml
-*.yml
 *.prefs
 /.settings
 /*.project
+/target/
