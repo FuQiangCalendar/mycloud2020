@@ -98,7 +98,25 @@
 	      <artifactId>springfox-swagger2</artifactId>
 	      <version>2.9.2</version>
 	    </dependency>
-	
+		
+		<!--shiro-->
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-spring-boot-starter</artifactId>
+		    <version>1.4.0</version>
+		</dependency>
+	       <dependency>
+	           <groupId>org.crazycake</groupId>
+	           <artifactId>shiro-redis</artifactId>
+	           <version>3.1.0</version>
+	           <exclusions>
+	               <exclusion>
+	                   <groupId>org.apache.shiro</groupId>
+	                   <artifactId>shiro-core</artifactId>
+	               </exclusion>
+	           </exclusions>
+	       </dependency>
+		
 	    <!-- swagger2的UI控件 -->
 	    <dependency>
 	      <groupId>io.springfox</groupId>
