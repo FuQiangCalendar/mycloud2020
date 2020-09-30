@@ -8,3 +8,10 @@
 /.settings
 /*.project
 /target/
+/cloud-api-commons/.settings/org.eclipse.wst.common.project.facet.core.xml
+/cloud-consumer-order80/.settings/org.eclipse.wst.common.project.facet.core.xml
+/cloud-consumerzk-order80/.settings/org.eclipse.wst.common.project.facet.core.xml
+/cloud-eureka-server7001/.settings/org.eclipse.wst.common.project.facet.core.xml
+/cloud-eureka-server7002/.settings/org.eclipse.wst.common.project.facet.core.xml
+/cloud-provider-payment8001/.settings/org.eclipse.wst.common.project.facet.core.xml
+/cloud-provider-payment8004/.settings/org.eclipse.wst.common.project.facet.core.xml
