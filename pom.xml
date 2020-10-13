@@ -16,6 +16,7 @@
     <module>cloud-consumerzk-order80</module>
     <module>cloud-spider-selenium8090</module>
     <module>cloud-pay-onlinepay</module>
+    <module>cloud-quartz</module>
   </modules>
   
   <!--统一管理jar包版本-->
