@@ -15,3 +15,5 @@
 /cloud-eureka-server7002/.settings/org.eclipse.wst.common.project.facet.core.xml
 /cloud-provider-payment8001/.settings/org.eclipse.wst.common.project.facet.core.xml
 /cloud-provider-payment8004/.settings/org.eclipse.wst.common.project.facet.core.xml
+/cloud-pay-onlinepay/.settings/org.eclipse.wst.common.project.facet.core.xml
+/cloud-quartz/.settings/org.eclipse.wst.common.project.facet.core.xml

@@ -7,7 +7,42 @@
   </parent>
   <artifactId>cloud-quartz</artifactId>
   
+  <repositories>
+     <repository>
+         <id>aliyun</id>
+         <name>aliyun Repository</name>
+         <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+         <snapshots>
+             <enabled>false</enabled>
+         </snapshots>
+     </repository>
+     <repository>
+         <id>jeecg</id>
+         <name>jeecg Repository</name>
+         <url>http://maven.jeecg.org/nexus/content/repositories/jeecg</url>
+         <snapshots>
+             <enabled>false</enabled>
+         </snapshots>
+     </repository>
+  </repositories>
   <dependencies>
+  	
+  	<!-- freemarker -->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-freemarker</artifactId>
+	</dependency>
+  	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-email</artifactId>
+	    <version>1.5</version>
+	</dependency>
+  	
+  	<dependency>
+   		<groupId>org.springframework.boot</groupId>
+   		<artifactId>spring-boot-starter-mail</artifactId>
+	</dependency>
 	<!-- 这个包是用户参数转成JSON用的 -->
 	<dependency>
 	    <groupId>com.alibaba</groupId>
