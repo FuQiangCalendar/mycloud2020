@@ -17,10 +17,11 @@ import com.atguigu.springcloud.domain.vo.Result;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 异常处理器
  * 
- * @Author scott
- * @Date 2019
+ * @ClassName:	CloudExceptionHandler
+ * @Description: 异常处理器
+ * @author:	FuQiang
+ * @date:	2020年11月16日 上午11:02:24
  */
 @RestControllerAdvice
 @Slf4j

@@ -76,5 +76,29 @@
         <groupId>io.springfox</groupId>
         <artifactId>springfox-swagger-ui</artifactId>
       </dependency>
+      
+      <dependency>
+            <groupId>aspose-words</groupId>
+            <artifactId>aspose-words</artifactId>
+            <version>15.8.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/aspose/aspose-words-15.8.0.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+            <groupId>aspose-words</groupId>
+            <artifactId>aspose-cells</artifactId>
+            <version>8.5.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/aspose/aspose-cells-8.5.2.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+            <groupId>aspose-words</groupId>
+            <artifactId>aspose-slides</artifactId>
+            <version>15.9.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/aspose/aspose-slides-15.9.0.jar</systemPath>
+        </dependency>
   </dependencies>
 </project>

@@ -1,0 +1,17 @@
+server: 
+  port: 8100
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+    context-path: /
+
+spring:
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 100MB 
+      enabled: true
+  application:
+    name: projects-fastdfs              # 指定服务名称  SERVICE-CORE
