@@ -1,8 +1,0 @@
-server:
-  port: 80
-  
-spring:  application:    name: cloud-order-service
-  cloud:
-    zookeeper:
-      connect-string: 192.168.10.106:2181 #zookeeper连接  
-    

@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--数据源-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/activiti"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <!--配置Activiti使用的processEngine对象   默认命名为processEngineConfiguration，可以自定义命名，但是需要我们在初始化配置文件的时候加上自定义id 作为参数-->
+    <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+        <!--注入数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--配置数据源方式二：-->
+        <!--<property name="jdbcDriver" value="com.mysql.jdbc.Driver"/>-->
+
+        <!--指定数据库生成策略，代表是否生成表结构-->
+        <property name="databaseSchemaUpdate" value="true"/>
+    </bean>
+</beans>    
