@@ -7,20 +7,14 @@
     <artifactId>cloud2020</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.atguigu.springcloud</groupId>
   <artifactId>cloud-java8</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>cloud-java8</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+  
   <dependencies>
-    <dependency>
+   <!--  <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
-    </dependency>
+    </dependency> -->
     <!-- 引入自己定义的api通用包，可以使用Payment 支付Entity -->
     <dependency>
       <groupId>com.atguigu.springcloud</groupId>

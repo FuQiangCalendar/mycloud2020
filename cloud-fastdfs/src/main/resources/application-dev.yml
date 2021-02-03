@@ -7,7 +7,7 @@ server:
       enabled: true
     context-path: /
 
-spring:
+spring: 
   servlet:
     multipart:
       max-request-size: 100MB
@@ -15,3 +15,4 @@ spring:
       enabled: true
   application:
     name: projects-fastdfs              # 指定服务名称  SERVICE-CORE
+ 
