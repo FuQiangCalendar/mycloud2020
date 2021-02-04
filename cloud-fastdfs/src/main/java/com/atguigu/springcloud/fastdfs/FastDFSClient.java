@@ -21,13 +21,63 @@ public class FastDFSClient {
 
 	static {
 		try {
-			String filePath = new ClassPathResource("fdfs_client.conf").getFile().getAbsolutePath();;
+			//config/fdfs_client.conf
+			String filePath = new ClassPathResource("config/fdfs_client.conf").getFile().getAbsolutePath();;
 			ClientGlobal.init(filePath);
 		} catch (Exception e) {
 			logger.error("FastDFS Client Init Fail!",e);
 		}
 	}
-
+	
+	//上传文件的方法
+	public static String[] fileUpload(byte[] fileBytes,String fileExt){
+	    String [] uploadArray = null;
+	    try {
+	        //1. 获取StorageClient对象
+	        StorageClient storageClient = getTrackerClient();
+	        //2.上传文件  第一个参数：本地文件路径 第二个参数：上传文件的后缀 第三个参数：文件信息
+	        uploadArray = storageClient.upload_file(fileBytes,fileExt,null);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (MyException e) {
+	        e.printStackTrace();
+	    } finally {
+//	        closeFastDFS();
+	    }
+	    return uploadArray;
+	}
+	
+	
+	/**
+	 * 
+	 * @Title:	closeFastDFS
+	 * @Description:	关闭FastDFS客户端连接
+	 * @param:	
+	 * @return:	void
+	 * @author:	FuQiang
+	 * @date:	2021年2月4日 下午1:58:55
+	 * @throws
+	 */
+	public static void closeFastDFS () {
+		StorageClient storageClient = null;
+		
+        try {
+        	//1. 获取StorageClient对象
+			storageClient = getTrackerClient();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (storageClient != null) {
+				try {
+					storageClient.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 	public static String[] upload(FastDFSFile file) {
 		logger.info("File Name: " + file.getName() + "File Length:" + file.getContent().length);
 
@@ -68,7 +118,25 @@ public class FastDFSClient {
 		}
 		return null;
 	}
-
+	
+	//下载文件的方法
+	public static byte[] fileDownload(String group,String remoteFile){
+	    byte[] fileBytes = null;
+	    try {
+	        //1. 获取StorageClient对象
+	        StorageClient storageClient = getTrackerClient();
+	        //2.下载文件 返回0表示成功，其它均表示失败
+	        fileBytes = storageClient.download_file(group,remoteFile);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (MyException e) {
+	        e.printStackTrace();
+	    } finally {
+	        closeFastDFS();
+	    }
+	    return fileBytes;
+	}
+	
 	public static InputStream downFile(String groupName, String remoteFileName) {
 		try {
 			StorageClient storageClient = getTrackerClient();
@@ -82,7 +150,25 @@ public class FastDFSClient {
 		}
 		return null;
 	}
-
+	
+	//删除文件的方法
+	public static int fileDelete(String group ,String remoteFile){
+	    int num = 1;
+	    try {
+	        //1. 获取StorageClient对象
+	        StorageClient storageClient = getTrackerClient();
+	        //2.删除文件 返回0表示成功，其它均表示失败
+	        num = storageClient.delete_file(group,remoteFile);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (MyException e) {
+	        e.printStackTrace();
+	    } finally {
+	        closeFastDFS();
+	    }
+	    return num; 
+	}
+	
 	public static void deleteFile(String groupName, String remoteFileName)
 			throws Exception {
 		StorageClient storageClient = getTrackerClient();

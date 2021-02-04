@@ -7,7 +7,7 @@ import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.atguigu.springcloud"})
 public class FastDFSApplication {
 	
 	public static void main(String[] args) throws Exception {
