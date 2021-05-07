@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.Test;
+
+import com.google.common.base.Function;
 
 /*
  * 一、Stream API 的操作步骤：
@@ -50,11 +55,37 @@ public class TestStreamaAPI {
 			new Employee(102, "李四", 59, 6666.66),
 			new Employee(101, "张三", 18, 9999.99),
 			new Employee(103, "王五", 28, 3333.33),
-			new Employee(104, "赵六", 8, 7777.77),
-			new Employee(104, "赵六", 8, 7777.77),
-			new Employee(104, "赵六", 8, 7777.77),
+			new Employee(104, "赵六1", 8, 7777.77),
+			new Employee(104, "赵六2", 18, 7777.77),
+			new Employee(104, "赵六3", 28, 7777.77),
 			new Employee(105, "田七", 38, 5555.55)
 	);
+	
+	/**
+	 * 
+	 * @Title:	groupTest
+	 * @Description:	Collectors.groupingBy  使用场景
+	 * @param:	
+	 * @return:	void
+	 * @author:	FuQiang
+	 * @date:	2021年3月17日 下午3:53:51
+	 * @throws
+	 */
+	@Test
+	public void groupTest () {
+		Map<Integer, List<Employee>> collect = emps.stream().collect(Collectors.groupingBy(e -> e.getId(), Collectors.toList()));
+		System.out.println(collect);
+		
+		Map<Integer, Long> collect2 = emps.stream().collect(Collectors.groupingBy(e -> e.getId(), Collectors.counting()));
+		System.out.println(collect2);
+		
+		Map<Integer, Double> collect3 = emps.stream().collect(Collectors.groupingBy(e -> e.getId(), Collectors.averagingInt(e -> e.getAge())));
+		System.out.println(collect3);
+		
+		Map<Boolean, List<Employee>> collect4 = emps.stream().collect(Collectors.partitioningBy(e -> e.getAge() > 18));
+		System.out.println(collect4);
+		
+	}
 	
 	/*
 	  筛选与切片

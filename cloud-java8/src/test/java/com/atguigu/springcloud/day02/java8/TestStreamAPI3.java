@@ -1,17 +1,10 @@
 package com.atguigu.springcloud.day02.java8;
 
-import java.util.Arrays;
-import java.util.DoubleSummaryStatistics;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import com.atguigu.springcloud.day02.java8.Employee.Status;
 import org.junit.Test;
 
-import com.atguigu.springcloud.day02.java8.Employee.Status;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class TestStreamAPI3 {
@@ -178,5 +171,77 @@ public class TestStreamAPI3 {
 			.collect(Collectors.reducing(Double::sum));
 		
 		System.out.println(sum.get());
+	}
+
+	/**
+	* 合并两个List 中对象某个值相同，合并对象 相当与BeanUtils.copyProperties(org,dest)
+	*/
+	@Test
+	public void test10 () {
+		Map<String,Object> map1 = new HashMap<>();
+		map1.put("patentNumber","123");
+		map1.put("id","1");
+		map1.put("tradingStatus",null);
+
+		Map<String,Object> map2 = new HashMap<>();
+		map2.put("patentNumber","123");
+		map2.put("remarks","");
+		map2.put("caseName","秀啊");
+		map2.put("patentStatus","1");
+		map2.put("checkInDeadline",null);
+		map2.put("transferAgencyFee","1");
+		map2.put("commissionAmount","200");
+
+		List<Map<String,Object>> list1 = new ArrayList<>();
+		list1.add(map1);
+		List<Map<String,Object>> list2 = new ArrayList<>();
+		list2.add(map2);
+
+		List<Map<String,Object>> lists = new ArrayList<>();
+		String mergeKey = "patentNumber";
+		lists.addAll(list1);
+		lists.addAll(list2);
+
+		Set set = new HashSet<>();
+
+		Map<String, List<Map<String, Object>>> collect1 = lists.stream()
+				.filter(map -> map.get(mergeKey) != null)
+
+				.collect(Collectors.groupingBy(o -> {//暂存所有key
+					set.addAll(o.keySet());//按mergeKey分组
+					return o.get(mergeKey).toString();
+				}));
+		System.out.println(collect1);
+
+		//详细版
+		List<Map> collect = lists.stream()
+				.filter(map -> map.get(mergeKey) != null)
+
+				.collect(Collectors.groupingBy(o -> {//暂存所有key
+					set.addAll(o.keySet());//按mergeKey分组
+					return o.get(mergeKey).toString();
+				}))
+				.entrySet().stream().map(o -> {//合并
+					Map map = o.getValue().stream().flatMap(m -> {
+						return m.entrySet().stream();
+					}).collect(HashMap::new, (m,v) -> m.put(v.getKey(), v.getValue()), HashMap::putAll); // 解决value值为null，导致的NPE问题
+//							.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> b)); // 此方法会因value的值为null，而报NPE
+					//为没有的key赋值0
+					set.stream().forEach(k -> {
+						if (!map.containsKey(k)) map.put(k, 0);
+					});
+					return map;
+
+				}).collect(Collectors.toList());
+
+
+		System.out.println("详细版>>>" + collect);
+
+		//简化版
+		collect = lists.stream()
+				.collect(Collectors.groupingBy(g -> g.get("patentNumber").toString())).entrySet().stream()
+				.map(m -> m.getValue().stream().flatMap(o -> o.entrySet().stream())
+						.collect(HashMap::new,(s,v) ->s.put(v.getKey(),v.getValue()),HashMap::putAll)).collect(Collectors.toList());
+		System.out.println("简化版>>>" + collect);
 	}
 }
