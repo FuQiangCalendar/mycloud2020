@@ -2,9 +2,9 @@ package com.atgui.springcloud;
 
 import com.atguigu.springcloud.WechatApplication;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
 import me.chanjar.weixin.common.bean.menu.WxMenuButton;
-import me.chanjar.weixin.common.bean.result.WxMediaUploadResult;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.kefu.WxMpKefuMessage;
 import me.chanjar.weixin.mp.bean.material.WxMediaImgUploadResult;
@@ -53,12 +53,40 @@ public class SpringBootRunWithTest {
         String accessToken = wxMpService.getAccessToken();
         log.info("accessToken>>>" + accessToken);
         //2、多媒体文件上传接口
-        WxMediaUploadResult image = wxMpService.getMaterialService().mediaUpload("image", new File("11"));
+        /*WxMediaUploadResult image = wxMpService.getMaterialService().mediaUpload(WxConsts.MediaFileType.IMAGE, new File("F:/动漫基地/04.jpg"));
         //3、下载多媒体文件接口
-        File file = wxMpService.getMaterialService().mediaDownload("123");
-        //4、上传logo接口
-        WxMediaImgUploadResult wxMediaImgUploadResult = wxMpService.getMaterialService().mediaImgUpload(new File("123"));
+        File file = wxMpService.getMaterialService().mediaDownload(image.getMediaId());
+        File saveFile = new File("C:/Users/Administrator/Desktop/测试/wechat" + File.separator + file.getName());
+        if (!saveFile.getParentFile().exists()) {
+            saveFile.getParentFile().mkdirs();
+        }
 
+        if (!saveFile.exists()) {
+            saveFile.createNewFile();
+        }
+
+        FileUtils.copyFile(file, saveFile);*/
+       /* WxMpMaterialFileBatchGetResult wxMpMaterialFileBatchGetResult = wxMpService.getMaterialService().materialFileBatchGet(WxConsts.MediaFileType.IMAGE, 0, 20);
+        log.info(new GsonJsonProvider().toJson(wxMpMaterialFileBatchGetResult));
+
+        WxMpMaterialFileBatchGetResult wxMpMaterialFileBatchGetResult1 = wxMpService.getMaterialService().materialFileBatchGet(WxConsts.MaterialType.IMAGE, 0, 20);
+        log.info(new GsonJsonProvider().toJson(wxMpMaterialFileBatchGetResult1));
+
+        WxMpMaterialFileBatchGetResult wxMpMaterialFileBatchGetResult2 = wxMpService.getMaterialService().materialFileBatchGet(WxConsts.MaterialType.NEWS, 0, 20);
+        log.info(new GsonJsonProvider().toJson(wxMpMaterialFileBatchGetResult2));*/
+        //4、上传logo接口
+//        WxMediaImgUploadResult wxMediaImgUploadResult = wxMpService.getMaterialService().mediaImgUpload(new File("F:/动漫基地/04.jpg"));
+
+    }
+
+    /**
+    * 上传logo
+    */
+    @Test
+    public void uploadLogo () throws Exception{
+        WxMediaImgUploadResult wxMediaImgUploadResult = wxMpService.getMaterialService().mediaImgUpload(new File("F:/动漫基地/04.jpg"));
+        String url = wxMediaImgUploadResult.getUrl();
+        log.info("logoURL:" + url);
     }
 
     /**
@@ -73,7 +101,7 @@ public class SpringBootRunWithTest {
         String accessToken = wxMpService.getAccessToken();
         log.info("accessToken>>>" + accessToken);
 
-        //获取关注这列表
+        //获取关注列表
         WxMpUserList wxMpUserList = wxMpService.getUserService().userList(null);
         List<String> openids = wxMpUserList.getOpenids();
         //获取用户基本信息
@@ -98,15 +126,18 @@ public class SpringBootRunWithTest {
     public void test4 () throws Exception {
         //1、创建
 //        String s = wxMpService.getMenuService().menuCreate("");
+
         WxMenu wxMenu = new WxMenu();
         WxMenuButton wxMenuButton = new WxMenuButton();
-        wxMenuButton.setType("click");
-        wxMenuButton.setName("获取官文");
-        wxMenuButton.setKey("tzs");
-        wxMenuButton.setUrl("https://www.baidu.com/");
+        wxMenuButton.setType(WxConsts.EventType.VIEW);
+        wxMenuButton.setName("百度一下");
+        wxMenuButton.setKey("BAIDU");
+        wxMenuButton.setUrl("http://www.baidu.com/");
+
         wxMenu.setButtons(new ArrayList<WxMenuButton>() {{
             add(wxMenuButton);
         }});
+
         String s1 = wxMpService.getMenuService().menuCreate(wxMenu);
         log.info("s1>>" + s1);
         //2、获取
@@ -114,6 +145,48 @@ public class SpringBootRunWithTest {
         log.info("wxMpMenu>>" + wxMpMenu);
         //3、删除
 //        wxMpService.getMenuService().menuDelete("1");
+    }
+    /**
+    * 生成多成菜单
+    */
+    @Test
+    public void generateMenu () {
+        WxMenu wxMenu = new WxMenu();
+        WxMenuButton wxMenuButton = new WxMenuButton();
+        wxMenuButton.setType("click");
+        wxMenuButton.setName("今日歌曲");
+        wxMenuButton.setKey("V1001_TODAY_MUSIC");
+
+        WxMenuButton wxMenuButton1 = new WxMenuButton();
+        wxMenuButton1.setName("菜单");
+        //子button
+        WxMenuButton wxMenuButton1_1 = new WxMenuButton();
+        wxMenuButton1_1.setName("搜索");
+        wxMenuButton1_1.setType("view");
+        wxMenuButton1_1.setUrl("http://www.baidu.com/");
+
+        WxMenuButton wxMenuButton1_2 = new WxMenuButton();
+        wxMenuButton1_2.setType("miniprogram");
+        wxMenuButton1_2.setName("wxa");
+        wxMenuButton1_2.setUrl("http://mp.weixin.qq.com");
+        wxMenuButton1_2.setAppId("wxf88734ba1fc9fcc0");
+        wxMenuButton1_2.setPagePath("pages/lunar/index");
+
+        WxMenuButton wxMenuButton1_3 = new WxMenuButton();
+        wxMenuButton1_3.setType("click");
+        wxMenuButton1_3.setName("赞一下我们");
+        wxMenuButton1_3.setKey("V1001_GOOD");
+
+        wxMenuButton1.setSubButtons(new ArrayList<WxMenuButton>(){{
+            add(wxMenuButton1_1);
+//            add(wxMenuButton1_2);
+            add(wxMenuButton1_3);
+        }});
+
+        wxMenu.setButtons(new ArrayList<WxMenuButton>() {{
+            add(wxMenuButton);
+            add(wxMenuButton1);
+        }});
     }
 
     /**

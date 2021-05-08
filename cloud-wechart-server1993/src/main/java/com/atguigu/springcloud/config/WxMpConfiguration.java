@@ -85,9 +85,9 @@ public class WxMpConfiguration {
                 .handler(this.unsubscribeHandler)
                 .end();
         // 菜单点击事件
-        router.rule().async(false).msgType(EVENT).event(CLICK)
+        /*router.rule().async(false).msgType(EVENT).event(CLICK)
                 .handler(this.clickEventHandler)
-                .end();
+                .end();*/
 
         //处理文本消息
         router.rule().async(false).msgType(TEXT).handler(this.textMessageHandler).end();
