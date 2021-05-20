@@ -22,6 +22,7 @@
     <module>cloud-java8</module>
       <module>cloud-wechart-server1993</module>
       <module>cloud-servletwechat-server-1994</module>
+      <module>cloud-designmode</module>
   </modules>
   
   <!--统一管理jar包版本-->
