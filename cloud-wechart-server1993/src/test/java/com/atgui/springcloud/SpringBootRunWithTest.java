@@ -1,6 +1,7 @@
 package com.atgui.springcloud;
 
-import com.atguigu.springcloud.WechatApplication;
+import com.atguigu.springcloud.config.WxMpProperties;
+import com.atguigu.springcloud.service.impl.WechatUserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
@@ -12,10 +13,13 @@ import me.chanjar.weixin.mp.bean.menu.WxMpMenu;
 import me.chanjar.weixin.mp.bean.result.WxMpQrCodeTicket;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import me.chanjar.weixin.mp.bean.result.WxMpUserList;
+import me.chanjar.weixin.mp.bean.tag.WxUserTag;
+import me.chanjar.weixin.mp.config.WxMpConfigStorage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
@@ -25,7 +29,7 @@ import java.util.List;
 /**
  * @Package com.atgui.springcloud
  * @ClassName SpringBootRunWithTest
- * @Description 启动测试类
+ * @Description 微信公众号单元测试  使用Mockito 测试框架
  * @Copyright: Copyright (c) 2021</p>
  * @Company: </p>
  * @Author FuQiangCalendar
@@ -33,13 +37,17 @@ import java.util.List;
  * @Version 1.0
  **/
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = WechatApplication.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = WechatApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = WechatUserServiceImpl.class)
 @Slf4j
 public class SpringBootRunWithTest {
 
-    @Autowired
+    @MockBean
     private WxMpService wxMpService;
-
+    @MockBean
+    private WxMpProperties wxMpProperties;
+    @Autowired
+    private WechatUserServiceImpl wechatUserServiceImpl;
     /**
     * @Description : 基础支持
     * @Param []
@@ -52,6 +60,13 @@ public class SpringBootRunWithTest {
         //1、获取AccessToken
         String accessToken = wxMpService.getAccessToken();
         log.info("accessToken>>>" + accessToken);
+
+        WxMpUserList wxMpUserList = wxMpService.getUserService().userList(null);
+        List<String> openids = wxMpUserList.getOpenids();
+        //获取用户基本信息
+        List<WxMpUser> wxMpUsers = wxMpService.getUserService().userInfoList(openids);
+        log.info("用户信息:{}", wxMpUsers);
+
         //2、多媒体文件上传接口
         /*WxMediaUploadResult image = wxMpService.getMaterialService().mediaUpload(WxConsts.MediaFileType.IMAGE, new File("F:/动漫基地/04.jpg"));
         //3、下载多媒体文件接口
@@ -109,6 +124,21 @@ public class SpringBootRunWithTest {
         log.info("wxMpUsers>>>>" + wxMpUsers);
         WxMpUser wxMpUser = wxMpService.getUserService().userInfo(wxMpUserList.getNextOpenid());
         log.info("wxMpUser>>>>" + wxMpUser);
+
+//        List<WxMpChangeOpenid> wxMpChangeOpenids = wxMpService.getUserService().changeOpenid("1", openids);
+
+        List<WxUserTag> wxUserTags = wxMpService.getUserTagService().tagGet();
+        log.info("wxUserTags>>>>" + wxUserTags);
+        //授权
+//        wxMpService.getOAuth2Service().getAccessToken();
+        //获取公众号信息
+        WxMpConfigStorage wxMpConfigStorage = wxMpService.getWxMpConfigStorage();
+        String oauth2redirectUri = wxMpConfigStorage.getOauth2redirectUri();
+        log.info("wxMpConfigStorage>>>" + wxMpConfigStorage);
+        log.info("oauth2redirectUri>>>" + oauth2redirectUri);
+
+//        wxMpService.getOAuth2Service().getUserInfo();
+
     }
 
     /**

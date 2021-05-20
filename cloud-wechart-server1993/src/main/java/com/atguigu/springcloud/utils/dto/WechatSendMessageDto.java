@@ -1,6 +1,5 @@
 package com.atguigu.springcloud.utils.dto;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +15,6 @@ import lombok.RequiredArgsConstructor;
  **/
 @Data
 @RequiredArgsConstructor
-@Builder(toBuilder = true)
 public class WechatSendMessageDto {
 
     private String toUser;

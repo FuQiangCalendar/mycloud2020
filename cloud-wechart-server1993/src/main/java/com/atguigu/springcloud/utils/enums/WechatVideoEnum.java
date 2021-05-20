@@ -2,8 +2,6 @@ package com.atguigu.springcloud.utils.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 /**
  * @Package com.atguigu.springcloud.utils.enums
@@ -18,8 +16,6 @@ import lombok.RequiredArgsConstructor;
  * avi、wmv、mpeg、mp4、mov、mkv、flv、f4v、m4v、rmvb、rm、3gp、dat、ts、mts、vob、fly
  **/
 @Getter
-@NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 public enum WechatVideoEnum {
 

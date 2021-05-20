@@ -2,8 +2,6 @@ package com.atguigu.springcloud.utils.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 /**
  * @Package com.atguigu.springcloud.utils.enums
@@ -18,8 +16,6 @@ import lombok.RequiredArgsConstructor;
  * bmp,jpg,png,tif,gif,pcx,tga,exif,fpx,svg,psd,cdr,pcd,dxf,ufo,eps,ai,raw,WMF,webp,avif等
  **/
 @Getter
-@RequiredArgsConstructor
-@NoArgsConstructor
 @AllArgsConstructor
 public enum WechatImageEnum {
     BMP ("bmp", "bmp格式图片"),
