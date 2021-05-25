@@ -23,6 +23,7 @@
       <module>cloud-wechart-server1993</module>
       <module>cloud-servletwechat-server-1994</module>
       <module>cloud-designmode</module>
+      <module>cloud-network-spring</module>
   </modules>
   
   <!--统一管理jar包版本-->
