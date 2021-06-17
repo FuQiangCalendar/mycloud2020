@@ -39,11 +39,32 @@
 		<commons.version>2.6</commons.version>
 		<mybatis.spring.boot.version>2.1.1</mybatis.spring.boot.version>
 		<fastdfs.client.version>1.27</fastdfs.client.version>
+        <kaptcha.version>2.3.2</kaptcha.version>
   </properties>
   
   <!--子模块继承之后，提供作用：锁定版本+子module不用谢groupId和version-->
   <dependencyManagement>
     <dependencies>
+
+        <!-- json -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.60</version>
+        </dependency>
+
+        <!--验证码 -->
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>${kaptcha.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>javax.servlet-api</artifactId>
+                    <groupId>javax.servlet</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
       <!-- <dependency>
 		  <groupId>org.csource</groupId>
 		  <artifactId>fastdfs-client-java</artifactId>

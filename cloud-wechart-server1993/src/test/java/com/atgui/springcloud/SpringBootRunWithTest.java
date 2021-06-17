@@ -1,5 +1,6 @@
 package com.atgui.springcloud;
 
+import com.atguigu.springcloud.WechatApplication;
 import com.atguigu.springcloud.config.WxMpProperties;
 import com.atguigu.springcloud.service.impl.WechatUserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +20,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
@@ -37,14 +37,14 @@ import java.util.List;
  * @Version 1.0
  **/
 @RunWith(SpringRunner.class)
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = WechatApplication.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = WechatUserServiceImpl.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = WechatApplication.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = WechatUserServiceImpl.class)
 @Slf4j
 public class SpringBootRunWithTest {
 
-    @MockBean
+    @Autowired
     private WxMpService wxMpService;
-    @MockBean
+    @Autowired
     private WxMpProperties wxMpProperties;
     @Autowired
     private WechatUserServiceImpl wechatUserServiceImpl;
@@ -160,12 +160,19 @@ public class SpringBootRunWithTest {
         WxMenu wxMenu = new WxMenu();
         WxMenuButton wxMenuButton = new WxMenuButton();
         wxMenuButton.setType(WxConsts.EventType.VIEW);
-        wxMenuButton.setName("百度一下");
-        wxMenuButton.setKey("BAIDU");
-        wxMenuButton.setUrl("http://www.baidu.com/");
+        wxMenuButton.setName("渡鸥官网");
+        wxMenuButton.setKey("DUOU");
+        wxMenuButton.setUrl("http://duou.com/");
+
+        WxMenuButton wxMenuButton2 = new WxMenuButton();
+        wxMenuButton2.setType(WxConsts.EventType.VIEW);
+        wxMenuButton2.setName("绑定");
+        wxMenuButton2.setKey("BANGDING");
+        wxMenuButton2.setUrl("http://www.duou.com/wx/login.html");
 
         wxMenu.setButtons(new ArrayList<WxMenuButton>() {{
             add(wxMenuButton);
+            add(wxMenuButton2);
         }});
 
         String s1 = wxMpService.getMenuService().menuCreate(wxMenu);
