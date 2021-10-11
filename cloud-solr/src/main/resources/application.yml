@@ -44,6 +44,10 @@ spring:
           username: root
           password: root
           driver-class-name: com.mysql.jdbc.Driver
+  # solr配置
+  data:
+    solr:
+      host: http://localhost:8983/solr/shunchao_solr
 mybatis-plus:
   config-location: classpath*:com/fuqiang/**/xml/*Mapper.xml
   global-config:
