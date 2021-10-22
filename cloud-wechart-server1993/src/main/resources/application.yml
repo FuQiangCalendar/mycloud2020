@@ -1,7 +1,7 @@
 server:
   tomcat:
     uri-encoding: UTF-8
-  port: 80
+  port: 8088
 
 wxmp:
   app-id: wxf88734ba1fc9fcc0
