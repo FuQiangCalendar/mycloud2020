@@ -1,0 +1,10 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8088
+
+wxmp:
+  app-id: wxf88734ba1fc9fcc0
+  app-secret: 5bdf010835d2f53af63f99883492e41c
+  token: jby646277
+  aes-key:

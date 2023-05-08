@@ -34,11 +34,11 @@
         <groupId>com.github.tobato</groupId>
         <artifactId>fastdfs-client</artifactId>
     </dependency> -->
-    <dependency>
+    <!--<dependency>
 	    <groupId>org.csource</groupId>
 	    <artifactId>fastdfs-client-java</artifactId>
 	    <version>1.29-SNAPSHOT</version>
-	</dependency>
+	</dependency>-->
 	<dependency>
 		<groupId>commons-io</groupId>
 		<artifactId>commons-io</artifactId>

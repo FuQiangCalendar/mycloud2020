@@ -1,3 +1,4 @@
+/*
 package com.atguigu.springcloud.fastdfs;
 
 import java.io.ByteArrayInputStream;
@@ -48,7 +49,8 @@ public class FastDFSClient {
 	}
 	
 	
-	/**
+	*/
+/**
 	 * 
 	 * @Title:	closeFastDFS
 	 * @Description:	关闭FastDFS客户端连接
@@ -57,7 +59,8 @@ public class FastDFSClient {
 	 * @author:	FuQiang
 	 * @date:	2021年2月4日 下午1:58:55
 	 * @throws
-	 */
+	 *//*
+
 	public static void closeFastDFS () {
 		StorageClient storageClient = null;
 		
@@ -205,4 +208,4 @@ public class FastDFSClient {
 		TrackerServer trackerServer = trackerClient.getTrackerServer();
 		return  trackerServer;
 	}
-}
+}*/

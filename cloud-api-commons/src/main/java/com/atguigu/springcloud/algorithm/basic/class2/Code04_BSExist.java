@@ -12,6 +12,29 @@ package com.atguigu.springcloud.algorithm.basic.class2;
  * @Date 2021-11-30
  */
 public class Code04_BSExist {
+
+    public static void main(String[] args) {
+        test();
+    }
+
+    // 对数器
+    public static void test () {
+        int testTime = 5000;
+        int maxSize = 100000;
+        int maxValue = 10000;
+        for (int i = 0; i < testTime; i++) {
+            int [] arr1 = generateRandomArray(maxSize, maxValue);
+            long startTime = System.currentTimeMillis();
+            int checkNum = (int) ((maxValue + 1) * Math.random()) - (int) (maxValue * Math.random());
+            if (!exist(arr1, checkNum)) {
+//                System.out.println(String.format("无 %s", checkNum));
+            }else {
+                System.out.println(String.format("有 %s", checkNum));
+                System.out.println(System.currentTimeMillis() - startTime + "ms");
+            }
+        }
+    }
+
     public static boolean exist (int[] sortedArr, int num) {
         if (sortedArr == null || sortedArr.length == 0) {
             return false;
@@ -37,5 +60,16 @@ public class Code04_BSExist {
             }
         }
         return sortedArr[L] == num;
+    }
+
+    public static int[] generateRandomArray (int maxSize,int maxValue) {
+        // Math.random() [0,1)
+        // Math.random() * N [0,N)
+        // (Math.ramdom() * N) [0, N-1]
+        int[] arr = new int[(int) ((maxSize+1)*Math.random())];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) ((maxValue + 1) * Math.random()) - (int) (maxValue * Math.random());
+        }
+        return arr;
     }
 }

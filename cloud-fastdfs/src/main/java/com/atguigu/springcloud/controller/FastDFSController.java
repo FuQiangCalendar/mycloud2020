@@ -1,3 +1,4 @@
+/*
 package com.atguigu.springcloud.controller;
 
 import java.io.IOException;
@@ -49,11 +50,13 @@ public class FastDFSController {
 	            log.info(creditorInfo.toString());
 	            String path=FastDFSClient.getTrackerUrl()+uploadArray[0]+ "/"+uploadArray[1];
 	            log.info(path);
-	            /*int updateRow = creditorService.updateCreditorInfo(creditorInfo);
+	            */
+/*int updateRow = creditorService.updateCreditorInfo(creditorInfo);
 	            //数据库更新成功
 	            if(updateRow > 0){
 	                result = 0;
-	            }*/
+	            }*//*
+
 	        }
 	    } catch (IOException e) {
 	        e.printStackTrace();
@@ -65,9 +68,11 @@ public class FastDFSController {
 	@ApiOperation(value = "fastDFS--下载文件", notes = "fastDFS--下载文件")
 	public ResponseEntity<byte[]> download(@RequestParam("groupname") String groupname, @RequestParam("remotefilepath") String remotefilepath){
 	    //根据债权id获取 债权对象
-	    /*CreditorInfo creditorInfo = creditorInfoService.getCreditorInfoById(id);
+	    */
+/*CreditorInfo creditorInfo = creditorInfoService.getCreditorInfoById(id);
 	    String extName = creditorInfo.getRemotefilepath().substring(creditorInfo.getRemotefilepath().indexOf("."));
-	    byte [] fileBytes = FastDFSClient.fileDownload(creditorInfo.getGroupname(),creditorInfo.getRemotefilepath());*/
+	    byte [] fileBytes = FastDFSClient.fileDownload(creditorInfo.getGroupname(),creditorInfo.getRemotefilepath());*//*
+
 		String extName = remotefilepath.substring(remotefilepath.indexOf("."));
 	    byte [] fileBytes = FastDFSClient.fileDownload(groupname, remotefilepath);
 
@@ -85,10 +90,12 @@ public class FastDFSController {
 	    int result = 1;
 	    try {
 //	        result = creditorService.deleteContract(id);
-	    	/**
+	    	*/
+/**
 	         * 注意：事务控制的数据库，所以我们先对数据库进行更新，在操作FastDFS
 	         * 如果操作FastDFS失败了，那么对数据库的操作回滚
-	         */
+	         *//*
+
 	        //更新数据库债权表的合同路径及组
 //	        int updateRow = creditorInfoMapper.updateConstractById(id);
 //	        if(updateRow > 0){
@@ -108,3 +115,4 @@ public class FastDFSController {
 	    return String.valueOf(result);
 	}
 }
+*/
